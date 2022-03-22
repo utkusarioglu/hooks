@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  hooks:
+    build:
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/usr/src/app/2/hooks
+      - vscode-extensions:/root/.vscode-server/extensions
+      - vscode-extensions-insiders:/root/.vscode-server-insiders/extensions
+
+volumes:
+  vscode-extensions:
+  vscode-extensions-insiders:
