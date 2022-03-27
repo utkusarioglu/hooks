@@ -1,7 +1,7 @@
 import { HooksManager } from "./hooks-manager";
 
 export function useHook() {
-  return "hook!!!fsd";
+  return "UberApp";
 }
 
 export function useFakeApi(): { title: string, body: string, userId: string }[] {
@@ -13,6 +13,8 @@ export function useFakeApi(): { title: string, body: string, userId: string }[] 
       .then((response) => response.json())
       .then(setList);
   }, []);
+
+  useEffect
 
   return list;
 }
@@ -42,8 +44,9 @@ type LoginCredentials = {
 }
 
 type TryLoginFunction = (LoginCredentials: LoginCredentials) => void;
+type SetIdleFunction = () => void;
 
-type UseFakeApiReturn = [LoginAttemptResponse, TryLoginFunction];
+type UseFakeApiReturn = [LoginAttemptResponse, TryLoginFunction, SetIdleFunction];
 
 export function useFakeLogin(): UseFakeApiReturn  {
   const { useState } = HooksManager.getCoupling("react");
@@ -64,5 +67,9 @@ export function useFakeLogin(): UseFakeApiReturn  {
     }, 1000);
   }
 
-  return [login, tryLogin];
+  const setIdle = () => {
+    setLogin({ state: "idle" });
+  }
+
+  return [login, tryLogin, setIdle];
 }
